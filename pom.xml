@@ -26,7 +26,7 @@
     <parent>
         <groupId>org.alfresco.maven</groupId>
         <artifactId>alfresco-sdk-parent</artifactId>
-        <version>2.0.0</version>
+        <version>1.1.1</version>
     </parent>
 
     <profiles>
@@ -50,7 +50,7 @@
         <!-- Defines the alfresco edition to compile against. Allowed values are [org.alfresco|org.alfresco.enterprise]--> 
         <alfresco.groupId>org.alfresco</alfresco.groupId>
         <!-- Defines the alfresco version to compile against -->
-        <alfresco.version>5.0.c</alfresco.version>
+        <alfresco.version>4.2.c</alfresco.version>
         <app.log.root.level>WARN</app.log.root.level>
         <!-- Defines the target WAR artifactId to run this amp, only used with the -Pamp-to-war switch
         .    | Allowed values: alfresco | share. Defaults to a repository AMP, but could point to your foundation WAR -->
