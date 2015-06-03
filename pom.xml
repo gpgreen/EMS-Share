@@ -29,18 +29,6 @@
     <version>1.1.1</version>
   </parent>
 
-  <profiles>
-    <profile>
-      <id>mbee-dev</id>
-      <properties>
-        <env.BUILD_NUMBER>1</env.BUILD_NUMBER>
-      </properties>
-    </profile>
-    <profile>
-      <id>jenkins</id>
-    </profile>
-  </profiles>
-  
   <!-- 
        | SDK properties have sensible defaults in the SDK parent,
        | but you can override the properties below to use another version. 
@@ -70,6 +58,44 @@
     <maven.test.skip>true</maven.test.skip>
   </properties>
 
+  <profiles>
+    <!-- Alfresco Community Edition -->
+    <profile>
+      <id>community</id>
+      <properties>
+        <alfresco.version>4.2.e</alfresco.version>
+        <alfresco.client.war.version>4.2.e</alfresco.client.war.version>
+        <alfrescoEditionName>community</alfrescoEditionName>
+        <packageName>mms-share-community</packageName>
+      </properties>
+    </profile>
+    <!-- Alfresco Enterprise Edition -->
+    <profile>
+      <id>enterprise</id>
+      <properties>
+        <alfresco.version>4.2.4</alfresco.version>
+        <alfresco.client.war.version>4.2.4</alfresco.client.war.version>
+        <alfrescoEditionName>enterprise</alfrescoEditionName>
+        <packageName>mms-share-enterprise</packageName>
+      </properties>
+      <repositories>
+        <repository>
+          <id>alfresco-private-repository</id>
+          <url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
+        </repository>
+      </repositories>
+    </profile>
+    <profile>
+      <id>mbee-dev</id>
+      <properties>
+        <env.BUILD_NUMBER>1</env.BUILD_NUMBER>
+      </properties>
+    </profile>
+    <profile>
+      <id>jenkins</id>
+    </profile>
+  </profiles>
+  
   <!-- Here we realize the connection with the Alfresco selected platform 
        (e.g.version and edition) -->
   <dependencyManagement>
@@ -128,6 +154,19 @@
   </repositories>
   
   <build>
+    <plugins>
+      <!-- which version of java are we compiling for -->
+      <plugin>
+      	<groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <verbose>false</verbose>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+    </plugins>
     <pluginManagement>
       <plugins>
 	<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
