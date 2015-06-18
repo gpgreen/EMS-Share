@@ -1983,7 +1983,7 @@ function getAlfrescoUrl(){
 	try{
 		json = getHostInfo();
 		var hostname = json.alfresco.host;
-		if(hostname.toLowerCase()=='localhost') hostname += ':' + json.alfresco.port;
+		if(json.alfresco.port!=80) hostname += ':' + json.alfresco.port;
 		return (json.alfresco.protocol + '://' + hostname);
 	}
 	catch(err){
