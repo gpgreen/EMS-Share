@@ -1981,10 +1981,14 @@ function getAlfrescoHostname(){
 function getAlfrescoUrl(){
 	var json;
 	try{
-		json = getHostInfo();
-		var hostname = json.alfresco.host;
-		if(json.alfresco.port!=80) hostname += ':' + json.alfresco.port;
-		return (json.alfresco.protocol + '://' + hostname);
+	    json = getHostInfo();
+	    var hostname = json.alfresco.host;
+	    var proto = json.alfresco.proto;
+	    var port = json.alfresco.port;
+	    if((proto == "http" && port != 80)
+	       || (proto == "https" && port != 443)) 
+		hostname += ':' + port;
+	    return (proto + '://' + hostname);
 	}
 	catch(err){
 		throw new Error('Unable to get host info.');
