@@ -20,8 +20,12 @@ function main()
    }
    
    var hostname = json.alfresco.host;
-   if(hostname.toLowerCase()=='localhost') hostname += ':' + json.alfresco.port;
-   hostname = json.alfresco.protocol + '://' + hostname;
+   var proto = json.alfresco.protocol;
+   var port = json.alfresco.port;
+   if((proto == "http" && port != 80)
+      || (proto == "https" && port != 443))
+           hostname += ':' + port;
+   hostname = proto + '://' + hostname;
    
    var siteName = page.url.templateArgs.site;
    if (siteName)

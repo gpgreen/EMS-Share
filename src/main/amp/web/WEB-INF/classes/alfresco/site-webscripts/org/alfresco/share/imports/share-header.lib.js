@@ -1958,8 +1958,12 @@ function getAlfrescoUrl(){
 	try{
 		json = getHostInfo();
 		var hostname = json.alfresco.host;
-		if(hostname.toLowerCase()=='localhost') hostname += ':' + json.alfresco.port;
-		return (json.alfresco.protocol + '://' + hostname);
+		var proto = json.alfresco.protocol;
+		var port = json.alfresco.port;
+		if((proto == "http" && port != 80)
+		   || (proto = "https" && port != 443)) 
+			hostname += ':' + port;
+		return (proto + '://' + hostname);
 	}
 	catch(err){
 		throw new Error('Unable to get host info.');
